@@ -1,6 +1,6 @@
 # seedbox
 
-Deluge, Jackett and Flaresolverr routed through a ProtonVPN P2P client. Requires a paid ProtonVPN account and downloads folder mounted through NFS. 
+Deluge, Jackett and Flaresolverr routed through a ProtonVPN P2P client. Requires a paid ProtonVPN account and downloads folder mounted through NFS. Also includes TDPS Downloader which will pull TDPS episodes through the VPN.
 
 ## Docker Compose Environment Variables
 

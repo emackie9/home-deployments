@@ -56,8 +56,29 @@ services:
       protonvpn:
         condition: service_started
     restart: always
+  
+  tdps-downloader:
+    image: emackie/tdps-downloader
+    container_name: tdps-downloader
+    environment:
+      - TDPS_LOGIN=${SEEDBOX_TDPS_LOGIN}
+      - TDPS_PASS=${SEEDBOX_TDPS_PASS}
+      - TDPS_PATH=${SEEDBOX_TDPS_PATH}
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - content:/app/downloads
+    depends_on:
+      protonvpn:
+        condition: service_started
+    restart: always
 
 volumes:
+  content:
+    name: seedbox_content
+    driver_opts:
+      type: "nfs"
+      o: "addr=${SEEDBOX_NFS_CONTENT_HOST},rw,nfsvers=4"
+      device: "${SEEDBOX_NFS_CONTENT_PATH}"
   deluge:
     name: seedbox_deluge
   downloads:
