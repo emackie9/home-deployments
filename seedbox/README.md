@@ -12,6 +12,6 @@ Deluge, Jackett and Flaresolverr routed through a ProtonVPN P2P client. Requires
 | `SEEDBOX_PROTONVPN_SERVER`        | No | ProtonVPN server, defaults to `P2P`. See [ProtonVPN](https://github.com/tprasadtp/protonvpn-docker)
 | `SEEDBOX_PROTONVPN_EXCLUDE_CIDRS` | Yes | ProtonVPN exclude CIDRs. See [ProtonVPN](https://github.com/tprasadtp/protonvpn-docker)
 | `SEEDBOX_PROTONVPN_MY_IP`         | Yes | External IP address of host (with no VPN)
-| `SEEDBOX_NFS_DOWNLOADS_HOST`      | Yes | Path on NFS server of mount, ex: `:/mnt/downloads`
+| `SEEDBOX_NFS_DOWNLOADS_HOST`      | Yes | Host of NFS server, ex: `192.168.0.5`
 | `SEEDBOX_NFS_DOWNLOADS_PATH`      | Yes | Path on NFS server of mount, ex: `:/mnt/downloads`
 | `TZ`                              | No | Defaults to `America/Toronto`
