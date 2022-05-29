@@ -60,6 +60,7 @@ services:
   tdps-downloader:
     image: emackie/tdps-downloader
     container_name: tdps-downloader
+    network_mode: service:protonvpn
     environment:
       - TDPS_LOGIN=${SEEDBOX_TDPS_LOGIN}
       - TDPS_PASS=${SEEDBOX_TDPS_PASS}
