@@ -1,5 +1,7 @@
 # nextcloud
 
+Nextcloud with Redis, MariaDB and webcron job at 300 second intervals. 
+
 ## Docker Compose Environment Variables
 
 | Name | Required | Description

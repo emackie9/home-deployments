@@ -1,5 +1,7 @@
 # mediabox
 
+Lidarr, Radarr, Sonarr and seperate Radarr and Sonarr instance exclusively for 4K content. Downloads and content folders are mounted through NFS. 
+
 ## Docker Compose Environment Variables
 
 | Name | Required | Description
