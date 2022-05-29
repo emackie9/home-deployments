@@ -1,0 +1,64 @@
+version: '3'
+services:
+
+  nextcloud-db:
+    image: mariadb:10.5
+    container_name: nextcloud-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    volumes:
+      - nextcloud_db:/var/lib/mysql
+    restart: always
+
+  nextcloud-redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    restart: always
+
+  nextcloud:
+    image: nextcloud:stable-apache
+    container_name: nextcloud
+    environment:
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=nextcloud-db
+      - REDIS_HOST=nextcloud-redis
+      - APACHE_DISABLE_REWRITE_IP=1
+      - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES}
+    volumes:
+      - nextcloud_html:/var/www/html
+      - nextcloud_apps:/var/www/html/custom_apps
+      - nextcloud_config:/var/www/html/config
+      - nextcloud_data:/var/www/html/data
+    ports:
+      - ${NEXTCLOUD_HOST_PORT:-8080}:80
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    restart: always
+
+  nextcloud-webcron:
+    image: cw1900/docker-webcron
+    container_name: nextcloud-webcron
+    environment:
+      - INTERVAL_TIME=${NEXTCLOUD_WEBCRON_INTERVAL:-300}
+      - URL=${NEXTCLOUD_WEBCRON_URL}
+    depends_on:
+      - nextcloud
+    restart: always
+
+volumes:
+  nextcloud_db:
+    name: nextcloud_db
+  nextcloud_html:
+    name: nextcloud_html
+  nextcloud_apps:
+    name: nextcloud_apps
+  nextcloud_config:
+    name: nextcloud_config
+  nextcloud_data:
+    name: nextcloud_data

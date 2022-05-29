@@ -1,0 +1,70 @@
+version: '3'
+services:
+  protonvpn:
+    image: docker.io/emackie/protonvpn:latest
+    container_name: protonvpn
+    environment:
+      PROTONVPN_USERNAME: ${SEEDBOX_PROTONVPN_USERNAME}
+      PROTONVPN_PASSWORD: ${SEEDBOX_PROTONVPN_PASSWORD}
+      PROTONVPN_TIER: ${SEEDBOX_PROTONVPN_TIER:-2}
+      PROTONVPN_SERVER: ${SEEDBOX_PROTONVPN_SERVER:-P2P}
+      PROTONVPN_EXCLUDE_CIDRS: ${SEEDBOX_PROTONVPN_EXCLUDE_CIDRS}
+      PROTONVPN_MY_IP: ${SEEDBOX_PROTONVPN_MY_IP}
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8112:8112
+      - 9117:9117
+    restart: always
+
+  deluge:
+    image: ghcr.io/linuxserver/deluge
+    container_name: deluge
+    network_mode: service:protonvpn
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - deluge:/config
+      - downloads:/downloads
+    depends_on:
+      protonvpn:
+        condition: service_started
+    restart: always
+
+  jackett:
+    image: ghcr.io/linuxserver/jackett
+    container_name: jackett
+    network_mode: service:protonvpn
+    environment:
+      - TZ=${TZ:-America/Toronto}
+      - AUTO_UPDATE=true
+    volumes:
+      - jackett:/config
+      - downloads:/downloads
+    depends_on:
+      protonvpn:
+        condition: service_started
+    restart: always
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr
+    container_name: flaresolverr
+    network_mode: service:protonvpn
+    depends_on:
+      protonvpn:
+        condition: service_started
+    restart: always
+
+volumes:
+  deluge:
+    name: seedbox_deluge
+  downloads:
+    name: seedbox_downloads
+    driver_opts:
+      type: "nfs"
+      o: "addr=${SEEDBOX_NFS_DOWNLOADS_HOST},rw,nfsvers=4"
+      device: "${SEEDBOX_NFS_DOWNLOADS_PATH}"
+  jackett:
+    name: seedbox_jackett

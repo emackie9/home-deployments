@@ -1,0 +1,91 @@
+version: '3'
+services:
+
+  lidarr:
+    image: ghcr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - lidarr:/config
+      - content:/content
+      - downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: always
+
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - radarr:/config
+      - content:/content
+      - downloads:/downloads
+    ports:
+      - 7878:7878
+    restart: always
+
+  radarr-4k:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr-4k
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - radarr-4k:/config
+      - content:/content
+      - downloads:/downloads
+    ports:
+      - 7879:7878
+    restart: always
+
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - sonarr:/config
+      - content:/content
+      - downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: always
+
+  sonarr-4k:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr-4k
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - sonarr-4k:/config
+      - content:/content
+      - downloads:/downloads
+    ports:
+      - 8988:8989
+    restart: always
+
+volumes:
+  content:
+    name: mediabox_content
+    driver_opts:
+      type: "nfs"
+      o: "addr=${MEDIABOX_NFS_CONTENT_HOST},rw,nfsvers=4"
+      device: "${MEDIABOX_NFS_CONTENT_PATH}"
+  downloads:
+    name: mediabox_downloads
+    driver_opts:
+      type: "nfs"
+      o: "addr=${MEDIABOX_NFS_DOWNLOADS_HOST},rw,nfsvers=4"
+      device: "${MEDIABOX_NFS_DOWNLOADS_PATH}"
+  lidarr:
+    name: mediabox_lidarr
+  radarr:
+    name: mediabox_radarr
+  radarr-4k:
+    name: mediabox_radarr_4k
+  sonarr:
+    name: mediabox_sonarr
+  sonarr-4k:
+    name: mediabox_sonarr_4k

@@ -1,0 +1,14 @@
+api:
+  dashboard: true
+  insecure: false
+
+providers:
+  docker:
+    useBindPortIP: true
+    exposedByDefault: false
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
