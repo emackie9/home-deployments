@@ -13,7 +13,24 @@ services:
       - transcoder:/transcode
     restart: on-failure:5
 
+  backups:
+    image: emackie/aws-cli-cron
+    container_name: plex-content-backup
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - aws_credentials:/root/.aws
+      - cronjobs:/cron
+      - content:/content
+    restart: on-failure:5
+
 volumes:
+  aws_credentials:
+    name: aws_credentials
+    driver: local
+  cronjobs:
+    name: plexstack_cron
+    driver: local
   config:
     name: plexstack_config
     driver: local
