@@ -29,8 +29,7 @@ services:
       - deluge:/config
       - downloads:/downloads
     depends_on:
-      protonvpn:
-        condition: service_started
+      - protonvpn
     restart: always
 
   jackett:
@@ -44,8 +43,7 @@ services:
       - jackett:/config
       - downloads:/downloads
     depends_on:
-      protonvpn:
-        condition: service_started
+      - protonvpn
     restart: always
 
   flaresolverr:
@@ -53,8 +51,7 @@ services:
     container_name: flaresolverr
     network_mode: service:protonvpn
     depends_on:
-      protonvpn:
-        condition: service_started
+      - protonvpn
     restart: always
   
   tdps-downloader:
@@ -69,8 +66,7 @@ services:
     volumes:
       - content:/app/downloads
     depends_on:
-      protonvpn:
-        condition: service_started
+      - protonvpn
     restart: always
 
 volumes:
