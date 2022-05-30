@@ -1,0 +1,28 @@
+version: "3"
+services:
+  plex:
+    image: plexinc/pms-docker
+    container_name: plex
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    ports:
+      - 32400:32400
+    volumes:
+      - config:/config
+      - content:${PLEXSTACK_CONTENT_DIR:-/content}
+      - transcode:/transcode
+    restart: alays
+
+volumes:
+  config:
+    name: plexstack_config
+    driver: local
+  content:
+    name: plexstack_content
+    driver_opts:
+      type: "nfs"
+      o: "addr=${PLEXSTACK_NFS_CONTENT_HOST},rw,nfsvers=4"
+      device: "${PLEXSTACK_NFS_CONTENT_PATH}"
+  transcoder:
+    name: plexstack_transcoder
+    driver: local
