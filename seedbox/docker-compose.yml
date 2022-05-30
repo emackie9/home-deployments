@@ -17,7 +17,7 @@ services:
     ports:
       - 8112:8112
       - 9117:9117
-    restart: always
+    restart: on-failure
 
   deluge:
     image: ghcr.io/linuxserver/deluge
@@ -30,7 +30,7 @@ services:
       - downloads:/downloads
     depends_on:
       - protonvpn
-    restart: always
+    restart: on-failure
 
   jackett:
     image: ghcr.io/linuxserver/jackett
@@ -44,7 +44,7 @@ services:
       - downloads:/downloads
     depends_on:
       - protonvpn
-    restart: always
+    restart: on-failure
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr
@@ -52,7 +52,7 @@ services:
     network_mode: service:protonvpn
     depends_on:
       - protonvpn
-    restart: always
+    restart: on-failure
   
   tdps-downloader:
     image: emackie/tdps-downloader
@@ -67,7 +67,7 @@ services:
       - content:/app/downloads
     depends_on:
       - protonvpn
-    restart: always
+    restart: on-failure
 
 volumes:
   content:
