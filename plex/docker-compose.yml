@@ -15,7 +15,7 @@ services:
 
   backups:
     image: emackie/aws-cli-cron
-    container_name: plex-content-backup
+    container_name: plex-backup
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
@@ -26,7 +26,7 @@ services:
 
 volumes:
   aws_credentials:
-    name: aws_credentials
+    name: plexstack_aws_credentials
     driver: local
   cronjobs:
     name: plexstack_cron
