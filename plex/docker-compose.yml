@@ -11,7 +11,7 @@ services:
       - config:/config
       - content:${PLEXSTACK_CONTENT_DIR:-/content}
       - transcoder:/transcode
-    restart: alays
+    restart: always
 
 volumes:
   config:
