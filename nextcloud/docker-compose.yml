@@ -11,12 +11,12 @@ services:
       - MYSQL_USER=nextcloud
     volumes:
       - nextcloud_db:/var/lib/mysql
-    restart: always
+    restart: on-failure:5
 
   nextcloud-redis:
     image: redis:alpine
     container_name: nextcloud-redis
-    restart: always
+    restart: on-failure:5
 
   nextcloud:
     image: nextcloud:stable-apache
@@ -39,7 +39,7 @@ services:
     depends_on:
       - nextcloud-db
       - nextcloud-redis
-    restart: always
+    restart: on-failure:5
 
   nextcloud-webcron:
     image: cw1900/docker-webcron
@@ -49,7 +49,7 @@ services:
       - URL=${NEXTCLOUD_WEBCRON_URL}
     depends_on:
       - nextcloud
-    restart: always
+    restart: on-failure:5
 
 volumes:
   nextcloud_db:
