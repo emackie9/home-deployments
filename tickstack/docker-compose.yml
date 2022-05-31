@@ -21,7 +21,7 @@ services:
     environment: 
       - INFLUX_ORGANIZATION=${INFLUX_ORGANIZATION}
       - INFLUX_BUCKET=${INFLUX_BUCKET}
-      - INFLUX_TOKEN=${INFLUX_TOKEN}
+      - INFLUX_TOKEN=${INFLUX_TOKEN:-notset}
       - HOST_ETC=/hostfs/etc
       - HOST_PROC=/hostfs/proc
       - HOST_SYS=/hostfs/sys
