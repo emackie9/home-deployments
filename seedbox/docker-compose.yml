@@ -53,21 +53,6 @@ services:
     depends_on:
       - protonvpn
     restart: on-failure:5
-  
-  tdps-downloader:
-    image: emackie/tdps-downloader
-    container_name: tdps-downloader
-    network_mode: service:protonvpn
-    environment:
-      - TDPS_LOGIN=${SEEDBOX_TDPS_LOGIN}
-      - TDPS_PASS=${SEEDBOX_TDPS_PASS}
-      - TDPS_PATH=${SEEDBOX_TDPS_PATH}
-      - TZ=${TZ:-America/Toronto}
-    volumes:
-      - content:/app/downloads
-    depends_on:
-      - protonvpn
-    restart: on-failure:5
 
 volumes:
   content:
