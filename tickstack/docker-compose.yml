@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  influxdb:
+    image: influxdb:2.2
+    container_name: influxdb
+    volumes:
+      - influxdb:/var/lib/influxdb2:rw
+    ports:
+      - "8086:8086"
+    restart: on-failure:5
+
+  telegraf:
+    image: telegraf:1.22
+    container_name: telegraf
+    command: --config-directory=/etc/telegraf/telegraf.d
+    volumes:
+      - telegrafconf:/etc/telegraf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /:/hostfs:ro
+    environment: 
+      - INFLUX_ORGANIZATION=${INFLUX_ORGANIZATION}
+      - INFLUX_BUCKET=${INFLUX_BUCKET}
+      - INFLUX_TOKEN=${INFLUX_TOKEN}
+      - HOST_ETC=/hostfs/etc
+      - HOST_PROC=/hostfs/proc
+      - HOST_SYS=/hostfs/sys
+      - HOST_VAR=/hostfs/var
+      - HOST_RUN=/hostfs/run
+      - HOST_MOUNT_PREFIX=/hostfs
+    depends_on:
+      - influxdb_cli
+    restart: on-failure:5
+
+volumes:
+  influxdb:
+    name: tickstack_influxdb
+    driver: local
+  telegrafconf:
+    name: tickstack_telegrafconf
+    driver: local
