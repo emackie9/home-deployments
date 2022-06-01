@@ -55,12 +55,6 @@ services:
     restart: on-failure:5
 
 volumes:
-  content:
-    name: seedbox_content
-    driver_opts:
-      type: "nfs"
-      o: "addr=${SEEDBOX_NFS_CONTENT_HOST},rw,nfsvers=4"
-      device: "${SEEDBOX_NFS_CONTENT_PATH}"
   deluge:
     name: seedbox_deluge
   downloads:
