@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  steamcmd-eco:
+    image: emackie/steamcmd-eco
+    container_name: steamcmd-eco
+    volumes:
+      - eco_server:/eco
+    ports:
+      - 3000:3000
+      - 3001:3001
+    
+volumes:
+  eco_server:
+    name: eco_server
+    driver: local
