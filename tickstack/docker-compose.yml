@@ -17,7 +17,7 @@ services:
     user: telegraf:${DOCKER_DAEMON_GRP_ID:-1}
     volumes:
       - telegrafconf:/etc/telegraf
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - /:/hostfs:ro
     environment: 
       - INFLUX_ORGANIZATION=${INFLUX_ORGANIZATION}
