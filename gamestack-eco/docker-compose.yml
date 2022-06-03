@@ -2,7 +2,7 @@ version: "3.9"
 services:
   steamcmd-eco:
     image: emackie/steamcmd-eco
-    container_name: steamcmd-eco
+    container_name: eco
     volumes:
       - eco_server:/eco
     ports:
@@ -12,7 +12,7 @@ services:
     
   docker-cron:
     image: emackie/docker-cron
-    container_name: steamcmd-eco-cron
+    container_name: eco-backup
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:

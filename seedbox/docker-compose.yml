@@ -1,7 +1,7 @@
 version: '3'
 services:
   protonvpn:
-    image: docker.io/emackie/protonvpn:latest
+    image: emackie/protonvpn
     container_name: protonvpn
     environment:
       PROTONVPN_USERNAME: ${SEEDBOX_PROTONVPN_USERNAME}
