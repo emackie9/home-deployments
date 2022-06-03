@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  valheim:
+    image: emackie/steamcmd-valheim
+    container_name: valheim
+    environment:
+      - VALHEIM_SERVER_PATH=${VALHEIM_SERVER_PATH:-/valheim}
+      - VALHEIM_SERVER_SAV_DIR=${VALHEIM_SERVER_SAV_DIR:-/valheim_backup}
+      - VALHEIM_SERVER_NAME=${VALHEIM_SERVER_NAME:-My Server}
+      - VALHEIM_SERVER_WORLD=${VALHEIM_SERVER_WORLD:-Dedicated}
+      - VALHEIM_SERVER_PASS=${VALHEIM_SERVER_PASS:-secret}
+      - VALHEIM_SERVER_PUBLIC=${VALHEIM_SERVER_PUBLIC:-1}
+    volumes:
+      - valheim_server:/valheim
+      - valheim_backup:/valheim_backup
+    ports:
+      - 2456:2456
+      - 2457:2457
+    restart: always
+    
+  docker-cron:
+    image: emackie/docker-cron
+    container_name: valheim-backup
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - valheim_cron:/cron
+    restart: always
+
+volumes:
+  valheim_server:
+    name: valheim_server
+    driver: local
+  valheim_cron:
+    name: valheim_cron
+    driver: local
+  valheim_backup:
+    name: valheim_backup
+    driver_opts:
+      type: "nfs"
+      o: "addr=${VALHEIM_NFS_BACKUP_HOST},rw,nfsvers=4"
+      device: "${VALHEIM_NFS_BACKUP_PATH}"
