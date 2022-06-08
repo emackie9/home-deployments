@@ -3,7 +3,7 @@ services:
 
   lidarr:
     image: ghcr.io/linuxserver/lidarr
-    container_name: lidarr
+    container_name: mediabox-lidarr
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
@@ -16,7 +16,7 @@ services:
 
   radarr:
     image: ghcr.io/linuxserver/radarr
-    container_name: radarr
+    container_name: mediabox-radarr
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
@@ -29,7 +29,7 @@ services:
 
   radarr-4k:
     image: ghcr.io/linuxserver/radarr
-    container_name: radarr-4k
+    container_name: mediabox-radarr-4k
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
@@ -42,7 +42,7 @@ services:
 
   sonarr:
     image: ghcr.io/linuxserver/sonarr
-    container_name: sonarr
+    container_name: mediabox-sonarr
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
@@ -55,7 +55,7 @@ services:
 
   sonarr-4k:
     image: ghcr.io/linuxserver/sonarr
-    container_name: sonarr-4k
+    container_name: mediabox-sonarr-4k
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
