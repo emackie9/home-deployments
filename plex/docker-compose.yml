@@ -35,11 +35,8 @@ volumes:
     name: plexstack_config
     driver: local
   content:
-    name: plexstack_content
-    driver_opts:
-      type: "nfs"
-      o: "addr=${PLEXSTACK_NFS_CONTENT_HOST},rw,nfsvers=4"
-      device: "${PLEXSTACK_NFS_CONTENT_PATH}"
+    name: ${PLEXSTACK_CONTENT_VOLUME:-content}
+    external: true
   transcoder:
     name: plexstack_transcoder
     driver: local
