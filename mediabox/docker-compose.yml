@@ -89,3 +89,8 @@ volumes:
     name: mediabox_sonarr
   sonarr-4k:
     name: mediabox_sonarr_4k
+
+networks:
+  default:
+    name: ${MEDIABOX_NETWORK:-bridge}
+    external: true
