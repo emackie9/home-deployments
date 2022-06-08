@@ -68,17 +68,11 @@ services:
 
 volumes:
   content:
-    name: mediabox_content
-    driver_opts:
-      type: "nfs"
-      o: "addr=${MEDIABOX_NFS_CONTENT_HOST},rw,nfsvers=4"
-      device: "${MEDIABOX_NFS_CONTENT_PATH}"
+    name: ${MEDIABOX_CONTENT_VOLUME:-content}
+    external: true
   downloads:
-    name: mediabox_downloads
-    driver_opts:
-      type: "nfs"
-      o: "addr=${MEDIABOX_NFS_DOWNLOADS_HOST},rw,nfsvers=4"
-      device: "${MEDIABOX_NFS_DOWNLOADS_PATH}"
+    name: ${MEDIABOX_DOWNLOADS_VOLUME:-content_downloads}
+    external: true
   lidarr:
     name: mediabox_lidarr
   radarr:
