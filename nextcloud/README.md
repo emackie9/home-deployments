@@ -10,3 +10,5 @@ Nextcloud with Redis, MariaDB and webcron job at 300 second intervals.
 | `NEXTCLOUD_HOST_PORT`         | No  | Nextcloud web port to expose, defaults to `8080`
 | `NEXTCLOUD_WEBCRON_URL`       | Yes | Nextcloud webcron url should end in `cron.php`
 | `NEXTCLOUD_WEBCRON_INTERVAL`  | No  | Nextcloud webcron interval in seconds, defaults to `300`
+| `NEXTCLOUD_NETWORK`           | Yes | Network on Docker engine to deploy to
+| `NEXTCLOUD_NETWORK`           | No | Network on Docker engine to deploy to. Defaults to `proxy_network`

@@ -9,3 +9,4 @@ InfluxDB and Telegraf. Environment variables can be used in configuration files 
 | `INFLUX_ORGANIZATION` | Yes | Setup InfluxDB first then provide organization value here
 | `INFLUX_BUCKET`       | Yes | Setup InfluxDB first then provide bucket value here
 | `INFLUX_TOKEN`        | Yes | Setup InfluxDB first then provide token value here
+| `TICKSTACK_NETWORK`   | No | Network on Docker engine to deploy to. Defaults to `proxy_network`

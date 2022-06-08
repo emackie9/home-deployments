@@ -60,14 +60,11 @@ services:
 volumes:
   deluge:
     name: seedbox_deluge
-  downloads:
-    name: seedbox_downloads
-    driver_opts:
-      type: "nfs"
-      o: "addr=${SEEDBOX_NFS_DOWNLOADS_HOST},rw,nfsvers=4"
-      device: "${SEEDBOX_NFS_DOWNLOADS_PATH}"
   jackett:
     name: seedbox_jackett
+  downloads:
+    name: ${SEEDBOX_DOWNLOADS_VOLUME:-content_downloads}
+    external: true
 
 networks:
   internet:
