@@ -35,3 +35,8 @@ volumes:
       type: "nfs"
       o: "addr=${ECO_NFS_BACKUP_HOST},rw,nfsvers=4"
       device: "${ECO_NFS_BACKUP_PATH}"
+
+networks:
+  default:
+    name: ${ECO_NETWORK:-proxy_network}
+    external: true

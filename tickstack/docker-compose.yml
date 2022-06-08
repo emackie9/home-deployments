@@ -40,3 +40,8 @@ volumes:
   telegrafconf:
     name: tickstack_telegrafconf
     driver: local
+
+networks:
+  default:
+    name: ${TICKSTACK_NETWORK:-proxy_network}
+    external: true
