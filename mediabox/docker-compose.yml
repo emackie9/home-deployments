@@ -92,5 +92,5 @@ volumes:
 
 networks:
   default:
-    name: ${MEDIABOX_NETWORK:-bridge}
+    name: ${MEDIABOX_NETWORK:-proxy_network}
     external: true

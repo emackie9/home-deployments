@@ -79,3 +79,8 @@ volumes:
     name: nextcloud_config
   nextcloud_data:
     name: nextcloud_data
+
+networks:
+  default:
+    name: ${NEXTCLOUD_NETWORK:-proxy_network}
+    external: true
