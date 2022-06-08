@@ -12,3 +12,4 @@ Nextcloud with Redis, MariaDB and webcron job at 300 second intervals.
 | `NEXTCLOUD_WEBCRON_INTERVAL`  | No  | Nextcloud webcron interval in seconds, defaults to `300`
 | `NEXTCLOUD_NETWORK`           | Yes | Network on Docker engine to deploy to
 | `NEXTCLOUD_NETWORK`           | No | Network on Docker engine to deploy to. Defaults to `proxy_network`
+| `NEXTCLOUD_AWS_VOLUME`        | No | Docker volume for AWS credentials. Defaults to `aws_credentials`

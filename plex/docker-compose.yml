@@ -26,8 +26,8 @@ services:
 
 volumes:
   aws_credentials:
-    name: plexstack_aws_credentials
-    driver: local
+    name: ${PLEXSTACK_AWS_VOLUME:-aws_credentials}
+    external: true
   cronjobs:
     name: plexstack_cron
     driver: local

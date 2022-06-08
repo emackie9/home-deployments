@@ -64,8 +64,8 @@ services:
 
 volumes:
   aws_credentials:
-    name: nextcloud_aws_credentials
-    driver: local
+    name: ${NEXTCLOUD_AWS_VOLUME:-aws_credentials}
+    external: true
   cronjobs:
     name: nextcloud_cron
     driver: local
