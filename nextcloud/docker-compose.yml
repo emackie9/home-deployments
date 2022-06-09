@@ -28,7 +28,11 @@ services:
       - MYSQL_HOST=nextcloud-db
       - REDIS_HOST=nextcloud-redis
       - APACHE_DISABLE_REWRITE_IP=1
+      - TRUSTED_DOMAINS=${NEXTCLOUD_TRUSTED_DOMAINS}
       - TRUSTED_PROXIES=${NEXTCLOUD_TRUSTED_PROXIES}
+      - OVERWRITECLIURL=${NEXTCLOUD_CLI_URL}
+      - OVERWRITEHOST=${NEXTCLOUD_HOST}
+      - OVERWRITEPROTOCOL=${NEXTCLOUD_PROTOCOL}
     volumes:
       - nextcloud_html:/var/www/html
       - nextcloud_apps:/var/www/html/custom_apps
