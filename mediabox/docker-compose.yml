@@ -10,8 +10,6 @@ services:
       - lidarr:/config
       - content:/content
       - downloads:/downloads
-    ports:
-      - 8686:8686
     restart: on-failure:5
 
   radarr:
@@ -23,8 +21,6 @@ services:
       - radarr:/config
       - content:/content
       - downloads:/downloads
-    ports:
-      - 7878:7878
     restart: on-failure:5
 
   radarr-4k:
@@ -36,8 +32,6 @@ services:
       - radarr-4k:/config
       - content:/content
       - downloads:/downloads
-    ports:
-      - 7879:7878
     restart: on-failure:5
 
   sonarr:
@@ -49,8 +43,6 @@ services:
       - sonarr:/config
       - content:/content
       - downloads:/downloads
-    ports:
-      - 8989:8989
     restart: on-failure:5
 
   sonarr-4k:
@@ -62,8 +54,6 @@ services:
       - sonarr-4k:/config
       - content:/content
       - downloads:/downloads
-    ports:
-      - 8988:8989
     restart: on-failure:5
 
 volumes:
