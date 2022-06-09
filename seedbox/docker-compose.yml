@@ -17,9 +17,9 @@ services:
     networks:
       - internet
       - proxy
-    ports:
-      - 8112:8112
-      - 9117:9117
+    expose:
+      - 8112
+      - 9117
     restart: on-failure:5
 
   deluge:
