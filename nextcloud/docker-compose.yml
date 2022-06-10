@@ -53,24 +53,7 @@ services:
       - nextcloud
     restart: on-failure:5
 
-  backups:
-    image: emackie/aws-cli-cron
-    container_name: nextcloud-backup
-    environment:
-      - TZ=${TZ:-America/Toronto}
-    volumes:
-      - aws_credentials:/root/.aws
-      - cronjobs:/cron
-      - nextcloud_data:/data
-    restart: on-failure:5
-
 volumes:
-  aws_credentials:
-    name: ${NEXTCLOUD_AWS_VOLUME:-aws_credentials}
-    external: true
-  cronjobs:
-    name: nextcloud_cron
-    driver: local
   nextcloud_db:
     name: nextcloud_db
   nextcloud_html:
