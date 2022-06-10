@@ -17,23 +17,10 @@ services:
       - 2456:2456/udp
       - 2457:2457/udp
     restart: always
-    
-  docker-cron:
-    image: emackie/docker-cron
-    container_name: valheim-backup
-    environment:
-      - TZ=${TZ:-America/Toronto}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - valheim_cron:/cron
-    restart: always
 
 volumes:
   valheim_server:
     name: valheim_server
-    driver: local
-  valheim_cron:
-    name: valheim_cron
     driver: local
   valheim_backup:
     name: valheim_backup
