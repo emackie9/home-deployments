@@ -4,37 +4,16 @@ services:
     image: emackie/steamcmd-eco
     container_name: eco
     volumes:
-      - eco_server:/eco
+      - eco:/eco
     ports:
       - 3000:3000
       - 3001:3001
     restart: always
-    
-  docker-cron:
-    image: emackie/docker-cron
-    container_name: eco-backup
-    environment:
-      - TZ=${TZ:-America/Toronto}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - eco_cron:/cron
-      - eco_server:/eco
-      - eco_backup:/eco_backup
-    restart: always
 
 volumes:
-  eco_server:
-    name: eco_server
-    driver: local
-  eco_cron:
-    name: eco_cron
-    driver: local
-  eco_backup:
-    name: eco_backup
-    driver_opts:
-      type: "nfs"
-      o: "addr=${ECO_NFS_BACKUP_HOST},rw,nfsvers=4"
-      device: "${ECO_NFS_BACKUP_PATH}"
+  eco:
+    name: eco
+    external: true
 
 networks:
   default:
