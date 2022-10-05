@@ -23,7 +23,7 @@ services:
     restart: on-failure:5
 
   deluge:
-    image: ghcr.io/linuxserver/deluge
+    image: ghcr.io/linuxserver/deluge:${DELUGE_VERSION:-latest}
     container_name: deluge
     network_mode: service:protonvpn
     environment:
