@@ -18,6 +18,7 @@ services:
       - internet
       - proxy
     expose:
+      - 8080  # qBittorrent
       - 8112  # Deluge
       - 9091  # Transmission
       - 9117  # Jackett
@@ -52,6 +53,19 @@ services:
       - protonvpn
     restart: on-failure:5
     
+  qbittorrent :
+    image: ghcr.io/linuxserver/qbittorrent:${QBITTORRENT_VERSION:-latest}
+    container_name: seedbox_qbittorrent 
+    network_mode: service:protonvpn
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - qbittorrent_config:/config
+      - downloads:/downloads
+    depends_on:
+      - protonvpn
+    restart: on-failure:5
+
   transmission:
     image: ghcr.io/linuxserver/transmission:${TRANSMISSION_VERSION:-latest}
     container_name: seedbox_transmission
@@ -99,6 +113,8 @@ volumes:
     name: seedbox_transmission_config
   transmission_watch:
     name: seedbox_transmission_watch
+  qbittorrent_config:
+    name: seedbox_qbittorrent_config
   downloads:
     name: ${SEEDBOX_DOWNLOADS_VOLUME:-content_downloads}
     external: true
