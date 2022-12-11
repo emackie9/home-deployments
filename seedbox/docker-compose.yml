@@ -2,7 +2,7 @@ version: '3'
 services:
   protonvpn:
     image: emackie/protonvpn
-    container_name: protonvpn
+    container_name: seedbox_protonvpn
     environment:
       PROTONVPN_USERNAME: ${SEEDBOX_PROTONVPN_USERNAME}
       PROTONVPN_PASSWORD: ${SEEDBOX_PROTONVPN_PASSWORD}
@@ -18,13 +18,29 @@ services:
       - internet
       - proxy
     expose:
-      - 8112
-      - 9117
+      - 8112 # Deluge
+      - 9091 # Transmission
+      - 9117 # Jackett
+    # Traefik configuration not working locally 
+    # labels:
+      # - "traefik.enable=true"
+      # - "traefik.docker.network=internet"
+      # - "traefik.passHostHeader=true"
+      # - "traefik.http.routers.seedbox_deluge.rule=Host(`${DELUGE_TRAEFIK_HOST:-deluge.localhost}`)"
+      # - "traefik.http.services.seedbox_deluge.loadbalancer.server.port=8112"
+      # - "traefik.http.routers.seedbox_deluge.service: seedbox_deluge"
+      # - "traefik.http.routers.seedbox_transmission.entrypoints: http"
+      # - "traefik.http.routers.seedbox_transmission.rule=Host(`${TRANSMISSION_TRAEFIK_HOST:-transmission.localhost}`)"
+      # - "traefik.http.routers.seedbox_transmission.service: seedbox_transmission_service"
+      # - "traefik.http.services.seedbox_transmission_service.loadbalancer.server.port=9091"
+      # - "traefik.http.services.seedbox_transmission.loadbalancer.server.scheme=http"
+      # - "traefik.http.routers.seedbox_jackett.rule=Host(`${JACKETT_TRAEFIK_HOST:-jackett.localhost}`)"
+      # - "traefik.http.services.seedbox_jackett.loadbalancer.server.port=9117"
     restart: on-failure:5
 
   deluge:
     image: ghcr.io/linuxserver/deluge:${DELUGE_VERSION:-latest}
-    container_name: deluge
+    container_name: seedbox_deluge
     network_mode: service:protonvpn
     environment:
       - TZ=${TZ:-America/Toronto}
@@ -35,9 +51,25 @@ services:
       - protonvpn
     restart: on-failure:5
     
+  transmission:
+    image: ghcr.io/linuxserver/transmission:${TRANSMISSION_VERSION:-latest}
+    container_name: seedbox_transmission
+    network_mode: service:protonvpn
+    environment:
+      - USER=${TRANSMISSION_USER}
+      - PASS=${TRANSMISSION_PASS}
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - transmission_config:/config
+      - transmission_watch:/watch
+      - downloads:/downloads
+    depends_on:
+      - protonvpn
+    restart: on-failure:5
+
   jackett:
     image: ghcr.io/linuxserver/jackett
-    container_name: jackett
+    container_name: seedbox_jackett
     network_mode: service:protonvpn
     environment:
       - TZ=${TZ:-America/Toronto}
@@ -51,7 +83,7 @@ services:
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr
-    container_name: flaresolverr
+    container_name: seedbox_flaresolverr
     network_mode: service:protonvpn
     depends_on:
       - protonvpn
@@ -62,6 +94,10 @@ volumes:
     name: seedbox_deluge
   jackett:
     name: seedbox_jackett
+  transmission_config:
+    name: seedbox_transmission_config
+  transmission_watch:
+    name: seedbox_transmission_watch
   downloads:
     name: ${SEEDBOX_DOWNLOADS_VOLUME:-content_downloads}
     external: true
