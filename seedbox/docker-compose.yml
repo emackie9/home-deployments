@@ -22,7 +22,6 @@ services:
       - 8112  # Deluge
       - 9091  # Transmission
       - 9117  # Jackett
-      - 51413 # Transmission Torrent Port
     # Traefik configuration not working locally 
     # labels:
       # - "traefik.enable=true"
