@@ -65,21 +65,22 @@ services:
       - protonvpn
     restart: on-failure:5
 
-  transmission:
-    image: ghcr.io/linuxserver/transmission:${TRANSMISSION_VERSION:-latest}
-    container_name: seedbox_transmission
-    network_mode: service:protonvpn
-    environment:
-      - USER=${TRANSMISSION_USER}
-      - PASS=${TRANSMISSION_PASS}
-      - TZ=${TZ:-America/Toronto}
-    volumes:
-      - transmission_config:/config
-      - transmission_watch:/watch
-      - downloads:/downloads
-    depends_on:
-      - protonvpn
-    restart: on-failure:5
+  # Removing Transmission in favour of qBitorrent
+  # transmission:
+  #   image: ghcr.io/linuxserver/transmission:${TRANSMISSION_VERSION:-latest}
+  #   container_name: seedbox_transmission
+  #   network_mode: service:protonvpn
+  #   environment:
+  #     - USER=${TRANSMISSION_USER}
+  #     - PASS=${TRANSMISSION_PASS}
+  #     - TZ=${TZ:-America/Toronto}
+  #   volumes:
+  #     - transmission_config:/config
+  #     - transmission_watch:/watch
+  #     - downloads:/downloads
+  #   depends_on:
+  #     - protonvpn
+  #   restart: on-failure:5
 
   jackett:
     image: ghcr.io/linuxserver/jackett
