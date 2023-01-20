@@ -14,7 +14,7 @@ services:
     restart: on-failure:5
 
   nextcloud-redis:
-    image: redis:${NEXTCLOUD_REDIS_TAG:-6-alpine}
+    image: redis:${NEXTCLOUD_REDIS_TAG:-7-alpine}
     container_name: nextcloud-redis
     restart: on-failure:5
 
