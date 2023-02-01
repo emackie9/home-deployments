@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  dokuwiki:
+    image: ghcr.io/linuxserver/dokuwiki:latest
+    container_name: dokuwiki
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    volumes:
+      - config:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dokuwiki.rule=Host(`${DOKUWIKI_TRAEFIK_HOST:-dokuwiki.localhost}`)"
+    restart: on-failure:5
+
+volumes:
+  config:
+    name: ${DOKUWIKI_CONFIG_VOLUME:-dokuwiki_config}
+
+networks:
+  default:
+    name: ${DOKUWIKI_NETWORK:-proxy_network}
+    external: true
