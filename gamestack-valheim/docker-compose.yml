@@ -23,8 +23,5 @@ volumes:
     name: valheim_server
     driver: local
   valheim_backup:
-    name: valheim_backup
-    driver_opts:
-      type: "nfs"
-      o: "addr=${VALHEIM_NFS_BACKUP_HOST},rw,nfsvers=4"
-      device: "${VALHEIM_NFS_BACKUP_PATH}"
+    name: ${VALHEIM_BACKUP_VOLUME:-valheim_backup}
+    external: true
