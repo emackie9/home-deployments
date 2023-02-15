@@ -1,0 +1,22 @@
+version: "3"
+services:
+  grocy:
+    image: lscr.io/linuxserver/grocy:latest
+    container_name: grocystack_grocy
+    environment:
+      - TZ=${TZ:-America/Toronto}
+    labels:
+      - "traefik.http.routers.grocy.rule=Host(`${GROCY_HOST:-grocy.localhost}`)"
+    volumes:
+      - config:/config
+    restart: on-failure:5
+
+volumes:
+  config:
+    name: grocystack_config
+    driver: local
+
+networks:
+  default:
+    name: ${GROCY_NETWORK:-proxy_network}
+    external: true
