@@ -137,7 +137,7 @@ services:
       ## environment variables for the backend here:
       ## https://help.penpot.app/technical-guide/configuration/#advanced-configuration
 
-      - PENPOT_FLAGS=enable-registration enable-login-with-password disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies
+      - PENPOT_FLAGS=${PENPOT_BACKEND_FLAGS:-enable-registration enable-login-with-password disable-email-verification enable-smtp enable-prepl-server disable-secure-session-cookies}
 
       ## Penpot SECRET KEY. It serves as a master key from which other keys for subsystems
       ## (eg http sessions) are derived.
@@ -150,7 +150,7 @@ services:
       ##
       ## python3 -c "import secrets; print(secrets.token_urlsafe(64))"
 
-      # - PENPOT_SECRET_KEY=my-insecure-key
+      - PENPOT_SECRET_KEY=${PENPOT_SECRET_KEY}
 
       ## The PREPL host. Mainly used for external programatic access to penpot backend
       ## (example: admin). By default it listen on `localhost` but if you are going to use
@@ -165,7 +165,7 @@ services:
       ## Consider using traefik and set the 'disable-secure-session-cookies' if you are
       ## not going to serve penpot under HTTPS.
 
-      - PENPOT_PUBLIC_URI=http://penpot.localhost
+      - PENPOT_PUBLIC_URI=${PENPOT_PUBLIC_URI:-http://penpot.localhost}
 
       ## Database connection parameters. Don't touch them unless you are using custom
       ## postgresql connection parameters.
@@ -199,21 +199,21 @@ services:
       ## based on real scenarios. If you want to help us, please leave it enabled. You can
       ## audit what data we send with the code available on github
 
-      - PENPOT_TELEMETRY_ENABLED=true
+      - PENPOT_TELEMETRY_ENABLED=${PENPOT_TELEMETRY_ENABLED:-false}
 
       ## Example SMTP/Email configuration. By default, emails are sent to the mailcatch
       ## service, but for production usage is recommended to setup a real SMTP
       ## provider. Emails are used to confirm user registrations & invitations. Look below
       ## how mailcatch service is configured.
 
-      - PENPOT_SMTP_DEFAULT_FROM=no-reply@example.com
-      - PENPOT_SMTP_DEFAULT_REPLY_TO=no-reply@example.com
-      - PENPOT_SMTP_HOST=penpot-mailcatch
-      - PENPOT_SMTP_PORT=1025
-      - PENPOT_SMTP_USERNAME=
-      - PENPOT_SMTP_PASSWORD=
-      - PENPOT_SMTP_TLS=false
-      - PENPOT_SMTP_SSL=false
+      - PENPOT_SMTP_DEFAULT_FROM=${PENPOT_SMTP_DEFAULT_FROM}
+      - PENPOT_SMTP_DEFAULT_REPLY_TO=${PENPOT_SMTP_DEFAULT_REPLY_TO}
+      - PENPOT_SMTP_HOST=${PENPOT_SMTP_HOST}
+      - PENPOT_SMTP_PORT=${PENPOT_SMTP_PORT:-1025}
+      - PENPOT_SMTP_USERNAME=${PENPOT_SMTP_USERNAME}
+      - PENPOT_SMTP_PASSWORD=${PENPOT_SMTP_PASSWORD}
+      - PENPOT_SMTP_TLS=${PENPOT_SMTP_TLS:-false}
+      - PENPOT_SMTP_SSL=${PENPOT_SMTP_SSL:-false}
 
   penpot-exporter:
     image: "penpotapp/exporter:latest"
@@ -256,15 +256,15 @@ services:
   ## port 1080 for read all emails the penpot platform has sent. Should be only used as a
   ## temporal solution meanwhile you don't have a real SMTP provider configured.
 
-  penpot-mailcatch:
-    image: sj26/mailcatcher:latest
-    restart: always
-    expose:
-      - '1025'
-    ports:
-      - "1080:1080"
-    networks:
-      - penpot
+  # penpot-mailcatch:
+  #   image: sj26/mailcatcher:latest
+  #   restart: always
+  #   expose:
+  #     - '1025'
+  #   ports:
+  #     - "1080:1080"
+  #   networks:
+  #     - penpot
 
   ## Example configuration of MiniIO (S3 compatible object storage service); If you don't
   ## have preference, then just use filesystem, this is here just for the completeness.
