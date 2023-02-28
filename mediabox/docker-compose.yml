@@ -2,7 +2,7 @@ version: '3'
 services:
 
   lidarr:
-    image: ghcr.io/linuxserver/lidarr
+    image: lscr.io/linuxserver/lidarr
     container_name: mediabox-lidarr
     hostname: mediabox-lidarr
     environment:
@@ -14,7 +14,7 @@ services:
     restart: on-failure:5
 
   radarr:
-    image: ghcr.io/linuxserver/radarr
+    image: lscr.io/linuxserver/radarr
     container_name: mediabox-radarr
     hostname: mediabox-radarr
     environment:
@@ -26,7 +26,7 @@ services:
     restart: on-failure:5
 
   radarr-4k:
-    image: ghcr.io/linuxserver/radarr
+    image: lscr.io/linuxserver/radarr
     container_name: mediabox-radarr-4k
     hostname: mediabox-radarr-4k
     environment:
@@ -38,7 +38,7 @@ services:
     restart: on-failure:5
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr
     container_name: mediabox-sonarr
     hostname: mediabox-sonarr
     environment:
@@ -50,7 +50,7 @@ services:
     restart: on-failure:5
 
   sonarr-4k:
-    image: ghcr.io/linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr
     container_name: mediabox-sonarr-4k
     hostname: mediabox-sonarr-4k
     environment:
