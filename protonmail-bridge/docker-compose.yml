@@ -4,8 +4,8 @@ services:
     image: shenxn/protonmail-bridge:latest
     container_name: protonmail-bridge 
     ports: 
-      - 1025:25
-      - 1143:143
+      - "1025:25"
+      - "1143:143"
     volumes:
       - config:/root
     restart: on-failure:5

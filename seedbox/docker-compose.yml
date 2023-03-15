@@ -18,10 +18,10 @@ services:
       - internet
       - proxy
     expose:
-      - 8080  # qBittorrent
-      - 8112  # Deluge
-      - 9091  # Transmission
-      - 9117  # Jackett
+      - "8080"  # qBittorrent
+      - "8112"  # Deluge
+      - "9091"  # Transmission
+      - "9117"  # Jackett
     # Traefik configuration not working locally 
     # labels:
       # - "traefik.enable=true"

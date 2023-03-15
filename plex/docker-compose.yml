@@ -6,7 +6,7 @@ services:
     environment:
       - TZ=${TZ:-America/Toronto}
     ports:
-      - 32400:32400
+      - "32400:32400"
     volumes:
       - config:/config
       - content:${PLEXSTACK_CONTENT_DIR:-/content}
