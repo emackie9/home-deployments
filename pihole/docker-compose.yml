@@ -8,8 +8,8 @@ services:
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     # https://github.com/pi-hole/docker-pi-hole/issues/1166
     ports:
-      - "${PIHOLE_IP}:53:53/tcp"
-      - "${PIHOLE_IP}:53:53/udp"
+      - "53:53/tcp"
+      - "53:53/udp"
       # - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
       - "${PIHOLE_WEBPORT}:80/tcp"
     environment:
