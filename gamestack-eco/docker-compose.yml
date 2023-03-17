@@ -6,8 +6,8 @@ services:
     volumes:
       - eco:/eco
     ports:
-      - 3000:3000
-      - 3001:3001
+      - "3000:3000"
+      - "3001:3001"
     restart: on-failure:5
 
 volumes:
