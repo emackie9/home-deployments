@@ -8,7 +8,9 @@ networks:
 
 volumes:
   penpot_postgres_v15:
+    external: true
   penpot_assets:
+    external: true
   # penpot_traefik:
   # penpot_minio:
 
