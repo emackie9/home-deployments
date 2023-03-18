@@ -56,14 +56,19 @@ services:
 volumes:
   nextcloud_db:
     name: nextcloud_db
+    external: true
   nextcloud_html:
     name: nextcloud_html
+    external: true
   nextcloud_apps:
     name: nextcloud_apps
+    external: true
   nextcloud_config:
     name: nextcloud_config
+    external: true
   nextcloud_data:
     name: nextcloud_data
+    external: true
 
 networks:
   default:
