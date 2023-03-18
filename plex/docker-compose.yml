@@ -1,25 +1,30 @@
 version: "3"
 services:
   plex:
-    image: plexinc/pms-docker
+    image: plexinc/pms-docker:${PLEX_TAG:-latest}
     container_name: plex
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${PLEX_TZ:-America/Toronto}
     ports:
       - "32400:32400"
     volumes:
       - config:/config
-      - content:${PLEXSTACK_CONTENT_DIR:-/content}
+      - content:${PLEX_CONTENT_INTERNAL:-/content}
       - transcoder:/transcode
     restart: on-failure:5
 
 volumes:
   config:
-    name: plexstack_config
-    driver: local
+    name: ${PLEX_CONFIG:-plex_config}
+    external: true
   content:
-    name: ${PLEXSTACK_CONTENT_VOLUME:-content}
+    name: ${PLEX_CONTENT:-content}
     external: true
   transcoder:
-    name: plexstack_transcoder
+    name: plex_transcoder
     driver: local
+
+networks:
+  default:
+    name: ${PLEX_NETWORK:-plex_network}
+    external: true
