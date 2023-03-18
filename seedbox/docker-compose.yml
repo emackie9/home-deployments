@@ -44,7 +44,7 @@ services:
     container_name: seedbox_deluge
     network_mode: service:protonvpn
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${SEEDBOX_TZ:-America/Toronto}
     volumes:
       - deluge:/config
       - downloads:/downloads
@@ -57,7 +57,7 @@ services:
     container_name: seedbox_qbittorrent 
     network_mode: service:protonvpn
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${SEEDBOX_TZ:-America/Toronto}
     volumes:
       - qbittorrent:/config
       - downloads:/downloads
