@@ -6,7 +6,7 @@ services:
     container_name: mediabox-lidarr
     hostname: mediabox-lidarr
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - lidarr:/config
       - content:/content
@@ -18,7 +18,7 @@ services:
     container_name: mediabox-radarr
     hostname: mediabox-radarr
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr:/config
       - content:/content
@@ -30,7 +30,7 @@ services:
     container_name: mediabox-radarr-4k
     hostname: mediabox-radarr-4k
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr-4k:/config
       - content:/content
@@ -42,7 +42,7 @@ services:
     container_name: mediabox-sonarr
     hostname: mediabox-sonarr
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr:/config
       - content:/content
@@ -54,7 +54,7 @@ services:
     container_name: mediabox-sonarr-4k
     hostname: mediabox-sonarr-4k
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr-4k:/config
       - content:/content
@@ -70,14 +70,19 @@ volumes:
     external: true
   lidarr:
     name: mediabox_lidarr
+    external: true
   radarr:
     name: mediabox_radarr
+    external: true
   radarr-4k:
     name: mediabox_radarr_4k
+    external: true
   sonarr:
     name: mediabox_sonarr
+    external: true
   sonarr-4k:
     name: mediabox_sonarr_4k
+    external: true
 
 networks:
   default:

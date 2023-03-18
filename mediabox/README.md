@@ -9,4 +9,4 @@ Lidarr, Radarr, Sonarr and separate Radarr and Sonarr instance exclusively for 4
 | `MEDIABOX_NETWORK`            | No | Network on Docker engine to deploy to. Defaults to `proxy_network`
 | `MEDIABOX_CONTENT_VOLUME`     | No | Name of volume where to read content. Defaults to `content`
 | `MEDIABOX_DOWNLOADS_VOLUME`   | No | Name of volume where to store downloads. Defaults to `content_downloads`
-| `TZ`                          | No | Defaults to `America/Toronto`
+| `MEDIABOX_TZ`                 | No | Defaults to `America/Toronto`
