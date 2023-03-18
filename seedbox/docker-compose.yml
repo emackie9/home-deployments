@@ -40,7 +40,7 @@ services:
     restart: on-failure:5
 
   deluge:
-    image: lscr.io/linuxserver/deluge:${DELUGE_VERSION:-latest}
+    image: lscr.io/linuxserver/deluge:${SEEDBOX_DELUGE_VERSION:-latest}
     container_name: seedbox_deluge
     network_mode: service:protonvpn
     environment:
@@ -53,13 +53,13 @@ services:
     restart: on-failure:5
     
   qbittorrent :
-    image: lscr.io/linuxserver/qbittorrent:${QBITTORRENT_VERSION:-latest}
+    image: lscr.io/linuxserver/qbittorrent:${SEEDBOX_QBITTORRENT_VERSION:-latest}
     container_name: seedbox_qbittorrent 
     network_mode: service:protonvpn
     environment:
       - TZ=${TZ:-America/Toronto}
     volumes:
-      - qbittorrent_config:/config
+      - qbittorrent:/config
       - downloads:/downloads
     depends_on:
       - protonvpn
@@ -70,7 +70,7 @@ services:
     container_name: seedbox_jackett
     network_mode: service:protonvpn
     environment:
-      - TZ=${TZ:-America/Toronto}
+      - TZ=${SEEDBOX_TZ:-America/Toronto}
       - AUTO_UPDATE=true
     volumes:
       - jackett:/config
@@ -89,13 +89,13 @@ services:
 
 volumes:
   deluge:
-    name: seedbox_deluge
+    name: ${SEEDBOX_DELUGE_VOLUME:-seedbox_deluge}
     external: true
   jackett:
-    name: seedbox_jackett
+    name: ${SEEDBOX_JACKETT_VOLUME:-seedbox_jackett}
     external: true
-  qbittorrent_config:
-    name: seedbox_qbittorrent_config
+  qbittorrent:
+    name: ${SEEDBOX_QBITTORENT_VOLUME:-seedbox_qbittorrent}
     external: true
   downloads:
     name: ${SEEDBOX_DOWNLOADS_VOLUME:-content_downloads}
