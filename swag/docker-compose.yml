@@ -23,7 +23,7 @@ services:
 
 volumes:
   config:
-    name: swag_config
+    name: ${SWAG_CONFIG:-swag_config}
     external: true
 
 networks:
