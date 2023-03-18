@@ -2,18 +2,18 @@ version: '3'
 services:
   swag:
     image: lscr.io/linuxserver/swag:latest
-    container_name: proxy-swag
+    container_name: swag
     cap_add:
       - NET_ADMIN
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=${TZ:-America/Toronto}
-      - URL=${PROXY_SWAG_DOMAIN:-example.com}
-      - SUBDOMAINS=${PROXY_SWAG_SUBDOMAINS:-www,}
-      - ONLY_SUBDOMAINS=${PROXY_SWAG_ONLY_SUBDOMAINS:-false}
+      - URL=${SWAG_DOMAIN:-example.com}
+      - SUBDOMAINS=${SWAG_SUBDOMAINS:-www,}
+      - ONLY_SUBDOMAINS=${SWAG_ONLY_SUBDOMAINS:-false}
       - VALIDATION=http
-      - EMAIL= ${PROXY_SWAG_EMAIL:-}
+      - EMAIL= ${SWAG_EMAIL:-}
     volumes:
       - config:/config
     ports:
@@ -23,10 +23,10 @@ services:
 
 volumes:
   config:
-    name: proxy_swag
-    driver: local
+    name: swag_config
+    external: true
 
 networks:
   default:
-    name: ${PROXY_SWAG_NETWORK:-proxy_network}
+    name: ${SWAG_NETWORK:-proxy_network}
     external: true
