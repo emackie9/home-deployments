@@ -25,3 +25,8 @@ volumes:
   valheim_worlds:
     name: ${VALHEIM_WORLDS_VOLUME:-valheim_worlds}
     external: true
+
+networks:
+  default:
+    name: ${VALHEIM_NETWORK:-valheim_network}
+    external: true
