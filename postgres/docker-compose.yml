@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: postgres_management
+    volumes:
+      - postgres_management:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${POSTGRES_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${POSTGRES_PASSWORD}
+    restart: on-failure:5
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres_server
+    volumes:
+      - postgres_server:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    restart: on-failure:5
+
+volumes:
+  postgres_management:
+    name: postgres_management
+    external: true
+  postgres_server:
+    name: postgres_server
+    external: true
+
+networks:
+  default:
+    name: ${POSTGRES_NETWORK:-proxy_network}
+    external: true
