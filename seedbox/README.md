@@ -6,11 +6,8 @@ Deluge, Jackett and Flaresolverr routed through a ProtonVPN P2P client. Requires
 
 | Name | Required | Description
 |---|---|---
-| `DELUGE_VERSION`                  | No  | Deluge image tag to pull. Defaults to `latest`
-| `TRANSMISSION_VERSION`            | No  | Tranmissions image tag to pull. Defaults to `latest`
-| `TRANSMISSION_USER`               | Yes | Transmission username for web interface
-| `TRANSMISSION_PASS`               | Yes | Transmission password for web interface
-| `QBITTORRENT_VERSION_VERSION`     | No  | qBittorrent image tag to pull. Defaults to `latest`
+| `SEEDBOX_QBITTORENT_VOLUME`       | No  | qBittorrent local volume to use for config. Defaults to `seedbox_qbittorrent`
+| `SEEDBOX_QBITTORRENT_VERSION`     | No  | qBittorrent image tag to pull. Defaults to `latest`
 | `SEEDBOX_PROTONVPN_USERNAME`      | Yes | ProtonVPN username. See [ProtonVPN](https://github.com/tprasadtp/protonvpn-docker)
 | `SEEDBOX_PROTONVPN_PASSWORD`      | Yes | ProtonVPN password. See [ProtonVPN](https://github.com/tprasadtp/protonvpn-docker)
 | `SEEDBOX_PROTONVPN_TIER`          | No  | ProtonVPN tier, defaults to `2` to support `P2P`. See [ProtonVPN](https://github.com/tprasadtp/protonvpn-docker)

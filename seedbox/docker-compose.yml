@@ -38,19 +38,6 @@ services:
       # - "traefik.http.routers.seedbox_jackett.rule=Host(`${JACKETT_TRAEFIK_HOST:-jackett.localhost}`)"
       # - "traefik.http.services.seedbox_jackett.loadbalancer.server.port=9117"
     restart: on-failure:5
-
-  deluge:
-    image: lscr.io/linuxserver/deluge:${SEEDBOX_DELUGE_VERSION:-latest}
-    container_name: seedbox_deluge
-    network_mode: service:protonvpn
-    environment:
-      - TZ=${SEEDBOX_TZ:-America/Toronto}
-    volumes:
-      - deluge:/config
-      - downloads:/downloads
-    depends_on:
-      - protonvpn
-    restart: on-failure:5
     
   qbittorrent :
     image: lscr.io/linuxserver/qbittorrent:${SEEDBOX_QBITTORRENT_VERSION:-latest}
@@ -88,9 +75,6 @@ services:
     restart: on-failure:5
 
 volumes:
-  deluge:
-    name: ${SEEDBOX_DELUGE_VOLUME:-seedbox_deluge}
-    external: true
   jackett:
     name: ${SEEDBOX_JACKETT_VOLUME:-seedbox_jackett}
     external: true
