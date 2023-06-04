@@ -1,42 +1,26 @@
-version: '3'
+version: '2.3'
 services:
   protonvpn:
-    image: emackie/protonvpn
+    image: ghcr.io/tprasadtp/protonwire:${SEEDBOX_PROTONVPN_VERSION:-7.2.0}
     container_name: seedbox_protonvpn
+    init: true
     environment:
-      PROTONVPN_USERNAME: ${SEEDBOX_PROTONVPN_USERNAME}
-      PROTONVPN_PASSWORD: ${SEEDBOX_PROTONVPN_PASSWORD}
-      PROTONVPN_TIER: ${SEEDBOX_PROTONVPN_TIER:-2}
-      PROTONVPN_SERVER: ${SEEDBOX_PROTONVPN_SERVER:-P2P}
-      PROTONVPN_EXCLUDE_CIDRS: ${SEEDBOX_PROTONVPN_EXCLUDE_CIDRS}
-      PROTONVPN_MY_IP: ${SEEDBOX_PROTONVPN_MY_IP}
+      PROTONVPN_SERVER: ${SEEDBOX_PROTONVPN_SERVER}
+      WIREGUARD_PRIVATE_KEY: ${SEEDBOX_PROTONVPN_KEY}
+      KILL_SWITCH: ${SEEDBOX_PROTONVPN_KILL_SWITCH:-0}
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun:/dev/net/tun
+    sysctls:
+      net.ipv4.conf.all.rp_filter: 2
+      net.ipv6.conf.all.disable_ipv6: 1
     networks:
       - internet
       - proxy
     expose:
       - "8080"  # qBittorrent
-      - "8112"  # Deluge
-      - "9091"  # Transmission
       - "9117"  # Jackett
-    # Traefik configuration not working locally 
-    # labels:
-      # - "traefik.enable=true"
-      # - "traefik.docker.network=internet"
-      # - "traefik.passHostHeader=true"
-      # - "traefik.http.routers.seedbox_deluge.rule=Host(`${DELUGE_TRAEFIK_HOST:-deluge.localhost}`)"
-      # - "traefik.http.services.seedbox_deluge.loadbalancer.server.port=8112"
-      # - "traefik.http.routers.seedbox_deluge.service: seedbox_deluge"
-      # - "traefik.http.routers.seedbox_transmission.entrypoints: http"
-      # - "traefik.http.routers.seedbox_transmission.rule=Host(`${TRANSMISSION_TRAEFIK_HOST:-transmission.localhost}`)"
-      # - "traefik.http.routers.seedbox_transmission.service: seedbox_transmission_service"
-      # - "traefik.http.services.seedbox_transmission_service.loadbalancer.server.port=9091"
-      # - "traefik.http.services.seedbox_transmission.loadbalancer.server.scheme=http"
-      # - "traefik.http.routers.seedbox_jackett.rule=Host(`${JACKETT_TRAEFIK_HOST:-jackett.localhost}`)"
-      # - "traefik.http.services.seedbox_jackett.loadbalancer.server.port=9117"
     restart: on-failure:5
     
   qbittorrent :
