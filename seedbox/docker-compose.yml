@@ -20,6 +20,7 @@ services:
       - proxy
     expose:
       - "8080"  # qBittorrent
+      - "8191"  # Flaresolverr
       - "9117"  # Jackett
     restart: on-failure:5
     
