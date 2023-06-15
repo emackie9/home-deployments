@@ -22,8 +22,11 @@ services:
       - internet
       - proxy
     expose:
-      - "8080" # qBittorrent
-      - "9117" # Jackett
+      - "8080"  # qBittorrent
+      - "8191"  # Flaresolverr
+      - "9117"  # Jackett
+    ports:
+      - "8191:8191"
     restart: on-failure:5
 
   qbittorrent:
