@@ -23,7 +23,7 @@ services:
       - type: tmpfs
         target: /tmp
     networks:
-      - networkName
+      - internet
     restart: on-failure:5
 
   qbittorrent:
