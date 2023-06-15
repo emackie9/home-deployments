@@ -13,8 +13,6 @@ services:
     sysctls:
       net.ipv4.conf.all.rp_filter: 2
       net.ipv6.conf.all.disable_ipv6: 1
-    networks:
-      - internet
     expose:
       - "8080"  # qBittorrent
       - "9117"  # Jackett
@@ -67,9 +65,4 @@ volumes:
     external: true
   downloads:
     name: ${SEEDBOX_DOWNLOADS_VOLUME:-content_downloads}
-    external: true
-
-networks:
-  internet:
-    name: ${SEEDBOX_NETWORK:-proxy_network}
     external: true
