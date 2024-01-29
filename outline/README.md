@@ -9,6 +9,7 @@ See [.env.sample](https://github.com/outline/outline/blob/main/.env.sample) for 
 | Name                       | Required | Description                                         |
 | -------------------------- | -------- | --------------------------------------------------- |
 | `OUTLINE_NETWORK`          | No       | Outline network to use. Defaults to `proxy_network` |
+| `OUTLINE_VERSION`          | No       | Outline image tag to use. Defaults to `0.74.0`      |
 | `OUTLINE_SECRET`           | Yes      |                                                     |
 | `OUTLINE_UTILS_SECRET`     | Yes      |                                                     |
 | `OUTLINE_URL`              | Yes      | Public URI.                                         |

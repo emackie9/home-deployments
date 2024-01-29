@@ -20,8 +20,8 @@ services:
     volumes:
       - outline_data:/var/lib/outline/data
     depends_on:
-      - postgres
-      - redis
+      - outline-postgres
+      - outline-redis
     environment:
       - SECRET_KEY=${OUTLINE_SECRET}
       - UTILS_SECRET=${OUTLINE_UTILS_SECRET}
