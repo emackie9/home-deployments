@@ -48,7 +48,7 @@ services:
 
   outline-webcron:
     image: cw1900/docker-webcron
-    container_name: nextcloud-webcron
+    container_name: outline-webcron
     environment:
       - INTERVAL_TIME=${OUTLINE_WEBCRON_INTERVAL:-43200}
       - URL=${OUTLINE_URL}/api/cron.daily?token=${OUTLINE_UTILS_SECRET}
