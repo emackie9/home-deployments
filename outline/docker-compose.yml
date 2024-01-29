@@ -36,7 +36,7 @@ services:
       - SMTP_REPLY_EMAIL=${OUTLINE_SMTP_REPLY_EMAIL}
       - SMTP_SECURE=${OUTLINE_SMTP_SECURE:-false}
       - DATABASE_URL=postgres://user:pass@outline-postgres:5432/outline
-      - PGSSLMODE=false
+      - PGSSLMODE=disable
       - FILE_STORAGE=local
       - FILE_STORAGE_UPLOAD_MAX_SIZE=26214400
       - REDIS_URL=redis://outline-redis:6379
