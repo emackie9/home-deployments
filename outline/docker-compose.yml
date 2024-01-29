@@ -46,6 +46,16 @@ services:
       - FILE_STORAGE_UPLOAD_MAX_SIZE=26214400
       - REDIS_URL=redis://outline-redis:6379
 
+  outline-webcron:
+    image: cw1900/docker-webcron
+    container_name: nextcloud-webcron
+    environment:
+      - INTERVAL_TIME=${OUTLINE_WEBCRON_INTERVAL:-43200}
+      - URL=${OUTLINE_URL}/api/cron.daily?token=${OUTLINE_UTILS_SECRET}
+    depends_on:
+      - outline
+    restart: on-failure:5
+
   outline-redis:
     image: redis:7-alpine
     container_name: outline-redis
