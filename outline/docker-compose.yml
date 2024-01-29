@@ -18,6 +18,8 @@ services:
     image: docker.getoutline.com/outlinewiki/outline:${OUTLINE_VERSION:-0.74.0}
     container_name: outline
     restart: on-failure:5
+    ports:
+      - "3000:3000"
     volumes:
       - outline_data:/var/lib/outline/data
     depends_on:
