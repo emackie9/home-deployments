@@ -40,6 +40,7 @@ services:
       - SMTP_REPLY_EMAIL=${OUTLINE_SMTP_REPLY_EMAIL}
       - SMTP_SECURE=${OUTLINE_SMTP_SECURE:-false}
       - FORCE_HTTPS=${OUTLINE_FORCE_HTTPS:-false}
+      - IFRAMELY_API_KEY=${OUTLINE_IFRAMELY_API_KEY}
       - DATABASE_URL=postgres://user:pass@outline-postgres:5432/outline
       - PGSSLMODE=disable
       - FILE_STORAGE=local
