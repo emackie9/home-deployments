@@ -1,7 +1,7 @@
 version: "3.8"
 
 networks:
-  penpot:
+  default:
     name: ${OUTLINE_NETWORK:-proxy_network}
     external: true
 
