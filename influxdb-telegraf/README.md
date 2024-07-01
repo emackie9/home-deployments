@@ -1,12 +1,15 @@
-# tickstack
+# telegraf
 
-InfluxDB and Telegraf. Environment variables can be used in configuration files like `token = "$INFLUX_TOKEN"`. Read up on Telegraf configurion [here](https://docs.influxdata.com/telegraf/v1.22/configuration/).
+Telegraf for InfluxDB. Use the provided `telegraf.conf` file which contains the following environment variables. Environment variables can be used in configuration files like `token = "$INFLUX_TOKEN"`. Read up on Telegraf configurion [here](https://docs.influxdata.com/telegraf/v1.31/configuration/).
+
+Customize and inject the configuration file into the docker using a method of your choice.
 
 ## Docker Compose Environment Variables
 
-| Name | Required | Description
-|---|---|---
-| `INFLUX_ORGANIZATION` | Yes | Setup InfluxDB first then provide organization value here
-| `INFLUX_BUCKET`       | Yes | Setup InfluxDB first then provide bucket value here
-| `INFLUX_TOKEN`        | Yes | Setup InfluxDB first then provide token value here
-| `TICKSTACK_NETWORK`   | No | Network on Docker engine to deploy to. Defaults to `proxy_network`
+| Name                   | Required | Description                                                |
+| ---------------------- | -------- | ---------------------------------------------------------- |
+| `DOCKER_DAEMON_GRP_ID` | No       | Unix group id for the docker daemon to allow docker access |
+| `INFLUX_URL`           | Yes      | Influx DB url                                              |
+| `INFLUX_ORGANIZATION`  | Yes      | Influx organization                                        |
+| `INFLUX_BUCKET`        | Yes      | Influx bucket                                              |
+| `INFLUX_TOKEN`         | Yes      | Influx token which needs write access for the bucket       |
