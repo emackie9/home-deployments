@@ -19,6 +19,7 @@ services:
     volumes:
       - config:/config
       - content:${PLEX_CONTENT_INTERNAL:-/content}
+      - photos:/photos
       - transcoder:/transcode
     restart: on-failure:5
 
@@ -28,6 +29,9 @@ volumes:
     external: true
   content:
     name: ${PLEX_CONTENT:-content}
+    external: true
+  photos:
+    name: ${PLEX_PHOTOS:-photos}
     external: true
   transcoder:
     name: plex_transcoder
