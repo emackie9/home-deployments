@@ -9,7 +9,7 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - lidarr:/config
-      - content:${MEDIABOX_MUSIC_INTERNAL:-/content/music}
+      - music:${MEDIABOX_MUSIC_INTERNAL:-/content/music}
       - downloads:/downloads
     restart: on-failure:5
 
