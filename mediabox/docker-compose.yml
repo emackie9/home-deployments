@@ -9,7 +9,7 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - lidarr:/config
-      - content:/content
+      - content:${MEDIABOX_MUSIC_INTERNAL:-/content/music}
       - downloads:/downloads
     restart: on-failure:5
 
@@ -64,6 +64,9 @@ services:
 volumes:
   content:
     name: ${MEDIABOX_CONTENT_VOLUME:-content}
+    external: true
+  music:
+    name: ${MEDIABOX_MUSIC_VOLUME:-music}
     external: true
   downloads:
     name: ${MEDIABOX_DOWNLOADS_VOLUME:-content_downloads}

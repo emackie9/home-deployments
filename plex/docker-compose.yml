@@ -18,7 +18,7 @@ services:
     volumes:
       - config:/config
       - content:${PLEX_CONTENT_INTERNAL:-/content}
-      - photos:/photos
+      - photos:${PLEX_PHOTOS_INTERNAL:-/photos}
       - transcoder:/transcode
     restart: on-failure:5
 
