@@ -9,7 +9,7 @@ services:
     volumes:
       - lidarr:/config
       - music:${MEDIABOX_MUSIC_INTERNAL:-/content/music}
-      - downloads:/downloads
+      - downloads:/downloads:ro
     restart: on-failure:5
 
   radarr:
@@ -20,8 +20,10 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr:/config
+      - anime-movies:${MEDIABOX_ANIME_MOVIES_INTERNAL:-/content/anime-movies}
+      - concerts:${MEDIABOX_CONCERTS_INTERNAL:-/content/concerts}
       - movies:${MEDIABOX_MOVIES_INTERNAL:-/content/movies}
-      - downloads:/downloads
+      - downloads:/downloads:ro
     restart: on-failure:5
 
   radarr-4k:
@@ -44,8 +46,9 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr:/config
+      - anime:${MEDIABOX_ANIME_INTERNAL:-/content/anime}
       - tv:${MEDIABOX_TV_INTERNAL:-/content/tv}
-      - downloads:/downloads
+      - downloads:/downloads:ro
     restart: on-failure:5
 
   sonarr-4k:
@@ -57,10 +60,22 @@ services:
     volumes:
       - sonarr-4k:/config
       - tv-4k:${MEDIABOX_TV_4K_INTERNAL:-/content/tv-4k}
-      - downloads:/downloads
+      - downloads:/downloads:ro
     restart: on-failure:5
 
 volumes:
+  anime:
+    name: ${MEDIABOX_ANIME_VOLUME:-anime}
+    external: true
+  anime-movies:
+    name: ${MEDIABOX_ANIME_MOVIES_VOLUME:-anime-movies}
+    external: true
+  concerts:
+    name: ${MEDIABOX_CONCERTS_VOLUME:-concerts}
+    external: true
+  downloads:
+    name: ${MEDIABOX_DOWNLOADS_VOLUME:-downloads}
+    external: true
   movies:
     name: ${MEDIABOX_MOVIES_VOLUME:-movies}
     external: true
@@ -69,9 +84,6 @@ volumes:
     external: true
   music:
     name: ${MEDIABOX_MUSIC_VOLUME:-music}
-    external: true
-  downloads:
-    name: ${MEDIABOX_DOWNLOADS_VOLUME:-downloads}
     external: true
   lidarr:
     name: mediabox_lidarr
