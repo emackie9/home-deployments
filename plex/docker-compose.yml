@@ -23,9 +23,9 @@ services:
       - content-concerts:${PLEX_CONTENT_CONCERTS_INTERNAL:-/content/concerts}:ro
       - content-movies:${PLEX_CONTENT_MOVIES_INTERNAL:-/content/movies}:ro
       - content-movies-4k:${PLEX_CONTENT_MOVIES_4K_INTERNAL:-/content/movies-4k}:ro
+      - content-photos-:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}:ro
       - content-tv:${PLEX_CONTENT_TV_INTERNAL:-/content/movies}:ro
       - content-tv-4k:${PLEX_CONTENT_TV_4K_INTERNAL:-/content/tv-4k}:ro
-      - content-photos-:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}:ro
       - content-wallpapers-:${PLEX_CONTENT_WALLPAPERS_INTERNAL:-/content/wallpapers}:ro
       - transcoder:/transcode
     restart: on-failure:5
@@ -52,14 +52,14 @@ volumes:
   content-movies-4k:
     name: ${PLEX_CONTENT_MOVIES_4K:-content-movies-4k}
     external: true
+  content-photos:
+    name: ${PLEX_PHOTOS:-content-photos}
+    external: true
   content-tv:
     name: ${PLEX_CONTENT_TV:-content-tv}
     external: true
   content-tv-4k:
     name: ${PLEX_CONTENT_TV_4K:-content-tv-4k}
-    external: true
-  content-photos:
-    name: ${PLEX_PHOTOS:-content-photos}
     external: true
   content-wallpapers:
     name: ${PLEX_WALLPAPERS:-content-wallpapers}
