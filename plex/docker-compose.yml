@@ -28,7 +28,7 @@ services:
       - content-photos:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}:ro
       - content-tv:${PLEX_CONTENT_TV_INTERNAL:-/content/movies}:ro
       - content-tv-4k:${PLEX_CONTENT_TV_4K_INTERNAL:-/content/tv-4k}:ro
-      - content-wallpapers:${PLEX_CONTENT_WALLPAPERS_INTERNAL:-/content/wallpapers}:ro
+      - content-wallpapers:${PLEX_CONTENT_WALLPAPERS_INTERNAL:-/content/wallpapers}
       - transcoder:/transcode
     restart: on-failure:5
 
