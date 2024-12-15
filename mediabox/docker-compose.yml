@@ -20,7 +20,7 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr:/config
-      - content:/content
+      - movies:${MEDIABOX_MOVIES_INTERNAL:-/content/movies}
       - downloads:/downloads
     restart: on-failure:5
 
@@ -32,7 +32,7 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr-4k:/config
-      - content:/content
+      - movies-4k:${MEDIABOX_MOVIES_4K_INTERNAL:-/content/movies-4k}
       - downloads:/downloads
     restart: on-failure:5
 
@@ -44,7 +44,7 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr:/config
-      - content:/content
+      - tv:${MEDIABOX_TV_INTERNAL:-/content/tv}
       - downloads:/downloads
     restart: on-failure:5
 
@@ -56,19 +56,22 @@ services:
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr-4k:/config
-      - content:/content
+      - tv-4k:${MEDIABOX_TV_4K_INTERNAL:-/content/tv-4k}
       - downloads:/downloads
     restart: on-failure:5
 
 volumes:
-  content:
-    name: ${MEDIABOX_CONTENT_VOLUME:-content}
+  movies:
+    name: ${MEDIABOX_MOVIES_VOLUME:-movies}
+    external: true
+  movies-4k:
+    name: ${MEDIABOX_MOVIES_4K_VOLUME:-movies-4k}
     external: true
   music:
     name: ${MEDIABOX_MUSIC_VOLUME:-music}
     external: true
   downloads:
-    name: ${MEDIABOX_DOWNLOADS_VOLUME:-content_downloads}
+    name: ${MEDIABOX_DOWNLOADS_VOLUME:-downloads}
     external: true
   lidarr:
     name: mediabox_lidarr
@@ -85,8 +88,14 @@ volumes:
   sonarr-4k:
     name: mediabox_sonarr_4k
     external: true
+  tv:
+    name: ${MEDIABOX_TV_VOLUME:-tv}
+    external: true
+  tv-4k:
+    name: ${MEDIABOX_TV_4K_VOLUME:-tv-4k}
+    external: true
 
 networks:
   default:
-    name: ${MEDIABOX_NETWORK:-proxy_network}
+    name: ${MEDIABOX_NETWORK:-proxy-network}
     external: true
