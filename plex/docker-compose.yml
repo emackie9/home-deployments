@@ -34,7 +34,7 @@ services:
 
 volumes:
   config:
-    name: ${PLEX_CONFIG:-plex_config}
+    name: ${PLEX_CONFIG:-plex-config}
     external: true
   content-anime:
     name: ${PLEX_CONTENT_ANIME:-content-anime}
@@ -73,7 +73,7 @@ volumes:
     name: ${PLEX_CONTENT_WALLPAPERS:-content-wallpapers}
     external: true
   transcoder:
-    name: ${PLEX_TRANSCODER:-plex_transcoder}
+    name: ${PLEX_TRANSCODER:-plex-transcoder}
     driver: local
 
 networks:
