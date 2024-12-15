@@ -20,9 +20,11 @@ services:
       - content-anime:${PLEX_CONTENT_ANIME_INTERNAL:-/content/anime}:ro
       - content-anime-artwork:${PLEX_CONTENT_ANIME_ARTWORK_INTERNAL:-/content/anime-artwork}:ro
       - content-anime-movies:${PLEX_CONTENT_ANIME_MOVIES_INTERNAL:-/content/anime-movies}:ro
+      - content-audio-books:${PLEX_CONTENT_AUDIO_BOOKS_INTERNAL:-/content/audio-books}:ro
       - content-concerts:${PLEX_CONTENT_CONCERTS_INTERNAL:-/content/concerts}:ro
       - content-movies:${PLEX_CONTENT_MOVIES_INTERNAL:-/content/movies}:ro
       - content-movies-4k:${PLEX_CONTENT_MOVIES_4K_INTERNAL:-/content/movies-4k}:ro
+      - content-music:${PLEX_CONTENT_MUSIC_INTERNAL:-/content/music}:ro
       - content-photos-:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}:ro
       - content-tv:${PLEX_CONTENT_TV_INTERNAL:-/content/movies}:ro
       - content-tv-4k:${PLEX_CONTENT_TV_4K_INTERNAL:-/content/tv-4k}:ro
@@ -43,6 +45,9 @@ volumes:
   content-anime-movies:
     name: ${PLEX_CONTENT_ANIME_MOVIES:-content-anime-movies}
     external: true
+  content-audio-books:
+    name: ${PLEX_CONTENT_AUDIO_BOOKS:-content-audio-books}
+    external: true
   content-concerts:
     name: ${PLEX_CONTENT_CONCERTS:-content-concerts}
     external: true
@@ -52,8 +57,11 @@ volumes:
   content-movies-4k:
     name: ${PLEX_CONTENT_MOVIES_4K:-content-movies-4k}
     external: true
+  content-music:
+    name: ${PLEX_CONTENT_MUSIC:-content-music}
+    external: true
   content-photos:
-    name: ${PLEX_PHOTOS:-content-photos}
+    name: ${PLEX_PCONTENT_HOTOS:-content-photos}
     external: true
   content-tv:
     name: ${PLEX_CONTENT_TV:-content-tv}
@@ -62,7 +70,7 @@ volumes:
     name: ${PLEX_CONTENT_TV_4K:-content-tv-4k}
     external: true
   content-wallpapers:
-    name: ${PLEX_WALLPAPERS:-content-wallpapers}
+    name: ${PLEX_CONTENT_WALLPAPERS:-content-wallpapers}
     external: true
   transcoder:
     name: ${PLEX_TRANSCODER:-plex_transcoder}
