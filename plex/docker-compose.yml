@@ -17,8 +17,16 @@ services:
       - "32414:32414/udp"
     volumes:
       - config:/config
-      - content:${PLEX_CONTENT_INTERNAL:-/content}
-      - photos:${PLEX_PHOTOS_INTERNAL:-/photos}
+      - content-anime:${PLEX_CONTENT_ANIME_INTERNAL:-/content/anime}
+      - content-anime-artwork:${PLEX_CONTENT_ANIME_ARTWORK_INTERNAL:-/content/anime-artwork}
+      - content-anime-movies:${PLEX_CONTENT_ANIME_MOVIES_INTERNAL:-/content/anime-movies}
+      - content-concerts:${PLEX_CONTENT_CONCERTS_INTERNAL:-/content/concerts}
+      - content-movies:${PLEX_CONTENT_MOVIES_INTERNAL:-/content/movies}
+      - content-movies-4k:${PLEX_CONTENT_MOVIES_4K_INTERNAL:-/content/movies-4k}
+      - content-tv:${PLEX_CONTENT_TV_INTERNAL:-/content/movies}
+      - content-tv-4k:${PLEX_CONTENT_TV_4K_INTERNAL:-/content/tv-4k}
+      - content-photos-:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}
+      - content-wallpapers-:${PLEX_CONTENT_WALLPAPERS_INTERNAL:-/content/wallpapers}
       - transcoder:/transcode
     restart: on-failure:5
 
@@ -26,14 +34,38 @@ volumes:
   config:
     name: ${PLEX_CONFIG:-plex_config}
     external: true
-  content:
-    name: ${PLEX_CONTENT:-content}
+  content-anime:
+    name: ${PLEX_CONTENT_ANIME:-content-anime}
     external: true
-  photos:
-    name: ${PLEX_PHOTOS:-photos}
+  content-anime-artwork:
+    name: ${PLEX_CONTENT_ANIME_ARTWORK:-content-anime-artwork}
+    external: true
+  content-anime-movies:
+    name: ${PLEX_CONTENT_ANIME_MOVIES:-content-anime-movies}
+    external: true
+  content-concerts:
+    name: ${PLEX_CONTENT_CONCERTS:-content-concerts}
+    external: true
+  content-movies:
+    name: ${PLEX_CONTENT_MOVIES:-content-movies}
+    external: true
+  content-movies-4k:
+    name: ${PLEX_CONTENT_MOVIES_4K:-content-movies-4k}
+    external: true
+  content-tv:
+    name: ${PLEX_CONTENT_TV:-content-tv}
+    external: true
+  content-tv-4k:
+    name: ${PLEX_CONTENT_TV_4K:-content-tv-4k}
+    external: true
+  content-photos:
+    name: ${PLEX_PHOTOS:-content-photos}
+    external: true
+  content-wallpapers:
+    name: ${PLEX_WALLPAPERS:-content-wallpapers}
     external: true
   transcoder:
-    name: plex_transcoder
+    name: ${PLEX_TRANSCODER:-plex_transcoder}
     driver: local
 
 networks:
