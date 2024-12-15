@@ -17,16 +17,16 @@ services:
       - "32414:32414/udp"
     volumes:
       - config:/config
-      - content-anime:${PLEX_CONTENT_ANIME_INTERNAL:-/content/anime}
-      - content-anime-artwork:${PLEX_CONTENT_ANIME_ARTWORK_INTERNAL:-/content/anime-artwork}
-      - content-anime-movies:${PLEX_CONTENT_ANIME_MOVIES_INTERNAL:-/content/anime-movies}
-      - content-concerts:${PLEX_CONTENT_CONCERTS_INTERNAL:-/content/concerts}
-      - content-movies:${PLEX_CONTENT_MOVIES_INTERNAL:-/content/movies}
-      - content-movies-4k:${PLEX_CONTENT_MOVIES_4K_INTERNAL:-/content/movies-4k}
-      - content-tv:${PLEX_CONTENT_TV_INTERNAL:-/content/movies}
-      - content-tv-4k:${PLEX_CONTENT_TV_4K_INTERNAL:-/content/tv-4k}
-      - content-photos-:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}
-      - content-wallpapers-:${PLEX_CONTENT_WALLPAPERS_INTERNAL:-/content/wallpapers}
+      - content-anime:${PLEX_CONTENT_ANIME_INTERNAL:-/content/anime}:ro
+      - content-anime-artwork:${PLEX_CONTENT_ANIME_ARTWORK_INTERNAL:-/content/anime-artwork}:ro
+      - content-anime-movies:${PLEX_CONTENT_ANIME_MOVIES_INTERNAL:-/content/anime-movies}:ro
+      - content-concerts:${PLEX_CONTENT_CONCERTS_INTERNAL:-/content/concerts}:ro
+      - content-movies:${PLEX_CONTENT_MOVIES_INTERNAL:-/content/movies}:ro
+      - content-movies-4k:${PLEX_CONTENT_MOVIES_4K_INTERNAL:-/content/movies-4k}:ro
+      - content-tv:${PLEX_CONTENT_TV_INTERNAL:-/content/movies}:ro
+      - content-tv-4k:${PLEX_CONTENT_TV_4K_INTERNAL:-/content/tv-4k}:ro
+      - content-photos-:${PLEX_CONTENT_PHOTOS_INTERNAL:-/content/photos}:ro
+      - content-wallpapers-:${PLEX_CONTENT_WALLPAPERS_INTERNAL:-/content/wallpapers}:ro
       - transcoder:/transcode
     restart: on-failure:5
 
