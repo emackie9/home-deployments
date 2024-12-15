@@ -61,7 +61,7 @@ volumes:
     name: ${PLEX_CONTENT_MUSIC:-content-music}
     external: true
   content-photos:
-    name: ${PLEX_PCONTENT_HOTOS:-content-photos}
+    name: ${PLEX_CONTENT_HOTOS:-content-photos}
     external: true
   content-tv:
     name: ${PLEX_CONTENT_TV:-content-tv}
