@@ -8,8 +8,8 @@ services:
       - PGID=${RSNAPSHOT_PGID:-1000}
       - TZ=${RSNAPSHOT_TZ:-UTC}
     volumes:
-      - rsnapshot-config:/config
-      - rsnapshot-snapshots:/.snapshots
+      - config:/config
+      - snapshots:/.snapshots
     restart: unless-stopped
 
 volumes:
