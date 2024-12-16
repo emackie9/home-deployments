@@ -10,6 +10,7 @@ services:
     volumes:
       - config:/config
       - snapshots:/.snapshots
+      - ssh:/root/.ssh
     restart: unless-stopped
 
 volumes:
@@ -18,6 +19,9 @@ volumes:
     external: true
   snapshots:
     name: ${RSNAPSHOT_SNAPSHOTS:-rsnapshot-snapshots}
+    external: true
+  ssh:
+    name: ${RSNAPSHOT_SSH:-rsnapshot-ssh}
     external: true
 
 networks:
