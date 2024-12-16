@@ -1,0 +1,25 @@
+
+services:
+  rsnapshot:
+    image: lscr.io/linuxserver/rsnapshot:latest
+    container_name: rsnapshot
+    environment:
+      - PUID=${RSNAPSHOT_PUID:-1000}
+      - PGID=${RSNAPSHOT_PGID:-1000}
+      - TZ=${RSNAPSHOT_TZ:-UTC}
+    volumes:
+      - rsnapshot-config:/config
+      - rsnapshot-snapshots:/.snapshots
+    restart: unless-stopped
+
+volumes:
+  config:
+    name: ${RSNAPSHOT_CONFIG:-rsnapshot-config}
+    external: true
+  snapshots:
+    name: ${RSNAPSHOT_SNAPSHOTS:-rsnapshot-snapshots}
+    external: true
+
+networks:
+  default:
+    name: rsnapshot-network
