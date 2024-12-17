@@ -16,6 +16,7 @@ services:
       - "32413:32413/udp"
       - "32414:32414/udp"
     volumes:
+      - backups:/backups
       - config:/config
       - content-anime:${PLEX_CONTENT_ANIME_INTERNAL:-/content/anime}:ro
       - content-anime-artwork:${PLEX_CONTENT_ANIME_ARTWORK_INTERNAL:-/content/anime-artwork}:ro
@@ -33,6 +34,9 @@ services:
     restart: on-failure:5
 
 volumes:
+  backups:
+    name: ${PLEX_BACKUPS:-plex-backups}
+    external: true
   config:
     name: ${PLEX_CONFIG:-plex-config}
     external: true
