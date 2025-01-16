@@ -15,7 +15,7 @@ services:
 volumes:
   pgadmin:
     name: pgadmin
-    driver: local
+    external: true
 
 networks:
   default:

@@ -26,4 +26,4 @@ services:
 volumes:
   telegraf_conf:
     name: telegraf_conf
-    driver: local
+    external: true
