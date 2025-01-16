@@ -1,6 +1,3 @@
----
-version: "3.5"
-
 networks:
   penpot:
     name: ${PENPOT_NETWORK:-proxy_network}

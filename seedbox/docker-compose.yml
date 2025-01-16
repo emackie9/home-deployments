@@ -1,4 +1,3 @@
-version: '2.3'
 services:
   protonvpn:
     image: ghcr.io/tprasadtp/protonwire:${SEEDBOX_PROTONVPN_VERSION:-7.2.0}
