@@ -1,0 +1,70 @@
+services:
+  gluetun:
+    cap_add:
+      - NET_ADMIN
+    container_name: seedbox-gluetun
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      SERVER_REGIONS: ${SEEDBOX_GLUETUN_REGIONS:-CA}
+      VPN_SERVICE_PROVIDER: ${SEEDBOX_GLUETUN_SERVICE_PROVIDER:-protonvpn}
+      VPN_TYPE: ${SEEDBOX_GLUETUN_TYPE:-wireguard}
+      WIREGUARD_PRIVATE_KEY: ${SEEDBOX_GLUETUN_KEY}
+    image: docker.io/qmcgaw/gluetun:${SEEDBOX_GLUETUN_VERSION:-latest}
+    expose:
+      - "8080" # qBittorrent
+      - "9117" # Jackett
+    networks:
+      - internet
+    restart: on-failure:5
+
+  qbittorrent:
+    container_name: seedbox-qbittorrent
+    depends_on:
+      - gluetun
+    environment:
+      - TZ=${SEEDBOX_TZ:-America/Toronto}
+    image: lscr.io/linuxserver/qbittorrent:${SEEDBOX_QBITTORRENT_VERSION:-latest}
+    network_mode: service:gluetun
+    restart: on-failure:5
+    volumes:
+      - qbittorrent:/config
+      - downloads:/downloads
+
+  jackett:
+    container_name: seedbox-jackett
+    depends_on:
+      - gluetun
+    environment:
+      - AUTO_UPDATE=true
+      - TZ=${SEEDBOX_TZ:-America/Toronto}
+    image: lscr.io/linuxserver/jackett
+    network_mode: service:gluetun
+    restart: on-failure:5
+    volumes:
+      - jackett:/config
+      - downloads:/downloads
+
+  flaresolverr:
+    container_name: seedbox-flaresolverr
+    depends_on:
+      - gluetun
+    image: ghcr.io/flaresolverr/flaresolverr
+    network_mode: service:gluetun
+    restart: on-failure:5
+
+volumes:
+  downloads:
+    name: ${SEEDBOX_DOWNLOADS_VOLUME:-content_downloads}
+    external: true
+  jackett:
+    name: ${SEEDBOX_JACKETT_VOLUME:-seedbox_jackett}
+    external: true
+  qbittorrent:
+    name: ${SEEDBOX_QBITTORENT_VOLUME:-seedbox_qbittorrent}
+    external: true
+
+networks:
+  internet:
+    name: ${SEEDBOX_NETWORK:-proxy_network}
+    external: true
