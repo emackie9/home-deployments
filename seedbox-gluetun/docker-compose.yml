@@ -11,11 +11,11 @@ services:
       VPN_TYPE: ${SEEDBOX_GLUETUN_TYPE:-wireguard}
       WIREGUARD_PRIVATE_KEY: ${SEEDBOX_GLUETUN_KEY}
     image: docker.io/qmcgaw/gluetun:${SEEDBOX_GLUETUN_VERSION:-latest}
-    expose:
-      - "8080" # qBittorrent
-      - "9117" # Jackett
     networks:
       - internet
+    ports:
+      - 8080:8080/tcp # qBittorrent
+      - 9117:9117/tcp # Jackett
     restart: on-failure:5
 
   qbittorrent:
