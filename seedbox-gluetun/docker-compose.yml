@@ -2,7 +2,7 @@ services:
   gluetun:
     cap_add:
       - NET_ADMIN
-    container_name: seedbox-gluetun
+    container_name: seedbox_gluetun
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
@@ -19,7 +19,7 @@ services:
     restart: on-failure:5
 
   qbittorrent:
-    container_name: seedbox-qbittorrent
+    container_name: seedbox_qbittorrent
     depends_on:
       - gluetun
     environment:
@@ -32,7 +32,7 @@ services:
       - downloads:/downloads
 
   jackett:
-    container_name: seedbox-jackett
+    container_name: seedbox_jackett
     depends_on:
       - gluetun
     environment:
@@ -46,7 +46,7 @@ services:
       - downloads:/downloads
 
   flaresolverr:
-    container_name: seedbox-flaresolverr
+    container_name: seedbox_flaresolverr
     depends_on:
       - gluetun
     image: ghcr.io/flaresolverr/flaresolverr
