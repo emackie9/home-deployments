@@ -6,7 +6,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      SERVER_REGIONS: ${SEEDBOX_GLUETUN_REGIONS:-CA}
+      SERVER_COUNTRIES: ${SEEDBOX_GLUETUN_COUNTRIES:-Canada}
       VPN_SERVICE_PROVIDER: ${SEEDBOX_GLUETUN_SERVICE_PROVIDER:-protonvpn}
       VPN_TYPE: ${SEEDBOX_GLUETUN_TYPE:-wireguard}
       WIREGUARD_PRIVATE_KEY: ${SEEDBOX_GLUETUN_KEY}
