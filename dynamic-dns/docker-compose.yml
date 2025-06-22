@@ -1,0 +1,20 @@
+
+services:
+  dynamic-dns:
+    image: public.ecr.aws/x2g1r6p7/eddaic/dynamic-dns:latest
+    container_name: dynamic-dns
+    restart: on-failure:5
+    depends_on:
+      - redis
+    environment:
+      - AWS_ACCESS_KEY_ID=${DDNS_AWS_ACCESS_KEY_ID}
+      - AWS_ACCESS_KEY_SECRET=${DDNS_AWS_ACCESS_KEY_SECRET}
+      - AWS_ROUTE_53_HOSTED_ZONE_ID=${DDNS_AWS_ROUTE_53_HOSTED_ZONE_ID}
+      - AWS_ROUTE_53_RESOURCE_RECORD_SET_NAME=${DDNS_AWS_ROUTE_53_RESOURCE_RECORD_SET_NAME}
+      - AWS_ROUTE_53_RESOURCE_RECORD_SET_TTL=${DDNS_AWS_ROUTE_53_RESOURCE_RECORD_SET_TTL:-60}
+      - REDIS_URL=redis://redis:6379/1
+
+  redis:
+    image: redis:alpine
+    container_name: dynamic-dns-redis
+    command: [ "--save", "60", "1", "--loglevel", "notice" ]
