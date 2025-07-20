@@ -1,0 +1,28 @@
+services:
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:${WIREGUARD_TAG:-latest}
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - TZ=${WIREGUARD_TZ:-America/Toronto}
+      - SERVERURL=${WIREGUARD_SERVERURL:-auto}
+      - SERVERPORT=51820
+      - PEERS=1
+      - PEERDNS=auto 
+      - INTERNAL_SUBNET=${WIREGUARD_INTERNAL_SUBNET:-192.168.2.0}
+      - ALLOWEDIPS=${WIREGUARD_ALLOWEDIPS:-0.0.0.0/0} 
+      - LOG_CONFS=${WIREGUARD_LOG_CONFS:-true}
+    volumes:
+      - wireguard-config:/config
+    ports:
+      - 51820:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped
+
+volumes:
+  wireguard-config:
+    name: ${WIREGUARD_VOLUME:-wireguard-config}
+    external: true
