@@ -42,7 +42,9 @@ services:
     image: lscr.io/linuxserver/sonarr
     container_name: mediabox-sonarr
     hostname: mediabox-sonarr
-    environment:
+    environment::
+      - PUID=1000
+      - PGID=1000
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr:/config
