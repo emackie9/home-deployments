@@ -5,6 +5,8 @@ services:
     container_name: mediabox-lidarr
     hostname: mediabox-lidarr
     environment:
+      - PUID=${MEDIABOX_PUID:-1000}
+      - PGID=${MEDIABOX_PGID:-1000}
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - lidarr:/config
@@ -17,6 +19,8 @@ services:
     container_name: mediabox-radarr
     hostname: mediabox-radarr
     environment:
+      - PUID=${MEDIABOX_PUID:-1000}
+      - PGID=${MEDIABOX_PGID:-1000}
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr:/config
@@ -31,11 +35,13 @@ services:
     container_name: mediabox-radarr-4k
     hostname: mediabox-radarr-4k
     environment:
+      - PUID=${MEDIABOX_PUID:-1000}
+      - PGID=${MEDIABOX_PGID:-1000}
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - radarr-4k:/config
       - movies-4k:${MEDIABOX_MOVIES_4K_INTERNAL:-/content/movies-4k}
-      - downloads:/downloads
+      - downloads:/downloads:ro
     restart: on-failure:5
 
   sonarr:
@@ -43,8 +49,8 @@ services:
     container_name: mediabox-sonarr
     hostname: mediabox-sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${MEDIABOX_PUID:-1000}
+      - PGID=${MEDIABOX_PGID:-1000}
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr:/config
@@ -58,6 +64,8 @@ services:
     container_name: mediabox-sonarr-4k
     hostname: mediabox-sonarr-4k
     environment:
+      - PUID=${MEDIABOX_PUID:-1000}
+      - PGID=${MEDIABOX_PGID:-1000}
       - TZ=${MEDIABOX_TZ:-America/Toronto}
     volumes:
       - sonarr-4k:/config
